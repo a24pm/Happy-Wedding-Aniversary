@@ -1,218 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Wedding Anniversary</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Wedding Anniversary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", sans-serif;
-        }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+}
 
-        /* ===== BACKGROUND ===== */
-        body {
-            min-height: 100vh;
-            background: url("images/intro.png") center / cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
+/* ===== BACKGROUND (SAME EVERYWHERE) ===== */
+body{
+    min-height:100svh;
+    background:url("images/intro.png") center/cover no-repeat;
+}
 
-        /* ===== OVERLAY ===== */
-        .overlay {
-            background: rgba(255, 245, 247, 0.35);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            padding: 40px;
-            border-radius: 25px;
-            max-width: 900px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.8s ease;
-        }
+/* ===== CENTER + SCROLL SAFE ===== */
+.wrapper{
+    min-height:100svh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
 
-        .screen {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
+/* ===== GLASS OVERLAY ===== */
+.overlay{
+    width:100%;
+    max-width:900px;
+    background:rgba(255,245,247,0.35);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    padding:30px;
+    border-radius:22px;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
 
-        .screen.active {
-            display: block;
-        }
+/* ===== SCREENS ===== */
+.screen{
+    display:none;
+    animation:fade 0.6s ease;
+}
+.screen.active{display:block;}
 
-        h1 {
-            color: #2B2B2B;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+h1{font-size:2.2rem;color:#2b2b2b;margin-bottom:10px;}
+h2{color:#444;}
+h3{font-size:2rem;color:#b03a2e;margin-bottom:15px;}
+p{color:#111;font-size:1.1rem;line-height:1.6;}
 
-        h3 {
-            color: #B03A2E;
-            font-size: 2.4rem;
-            margin-bottom: 20px;
-        }
+.photos{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:20px;
+}
+.photos img{
+    width:260px;
+    height:330px;
+    object-fit:cover;
+    border-radius:18px;
+    box-shadow:0 12px 25px rgba(0,0,0,0.25);
+}
 
-        p {
-            color: #060606;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-top: 15px;
-        }
+.single-img{
+    width:320px;
+    max-width:100%;
+    height:auto;
+    border-radius:18px;
+    margin-top:20px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.3);
+}
 
-        .photos {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+.hint{
+    margin-top:20px;
+    font-size:0.9rem;
+    opacity:0.6;
+}
 
-        .photos img {
-            width: 260px;
-            height: 330px;
-            object-fit: cover;
-            border-radius: 18px;
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
-        }
+@keyframes fade{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+}
 
-        .single-img {
-            width: 320px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
-        }
-
-        .hint {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            opacity: 0.6;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to   { opacity: 1; transform: scale(1); }
-        }
-
-        /* =========================
-           TABLETS
-        ========================= */
-        @media (max-width: 900px) {
-            .overlay {
-                padding: 30px;
-            }
-
-            h1, h3 {
-                font-size: 2.1rem;
-            }
-
-            p {
-                font-size: 1.1rem;
-            }
-
-            .photos img {
-                width: 240px;
-                height: 300px;
-            }
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-        @media (max-width: 600px) {
-            body {
-                padding: 20px;
-            }
-
-            .overlay {
-                padding: 20px;
-                border-radius: 18px;
-            }
-
-            h1 {
-                font-size: 1.7rem;
-            }
-
-            h3 {
-                font-size: 1.8rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-
-            .photos {
-                gap: 15px;
-            }
-
-            .photos img,
-            .single-img {
-                width: 100%;
-                height: auto;
-            }
-
-            .hint {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* =========================
-           VERY SMALL PHONES
-        ========================= */
-        @media (max-width: 380px) {
-            h1, h3 {
-                font-size: 1.5rem;
-            }
-
-            p {
-                font-size: 0.95rem;
-            }
-
-            .overlay {
-                padding: 16px;
-            }
-        }
-    </style>
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+    h1{font-size:1.7rem;}
+    h3{font-size:1.6rem;}
+    .photos img{width:100%;height:auto;}
+}
+</style>
 </head>
 
 <body>
 
-<div class="overlay">
+<div class="wrapper">
+<div class="overlay" id="overlay">
 
     <!-- SCREEN 0 -->
     <div class="screen active">
         <h1>Happy Wedding Anniversary</h1>
         <h2>To</h2>
         <h3>Acha & Amma</h3>
-        <p>Click to begin the journey</p>
+        <p>Tap to begin the journey</p>
         <div class="hint">Tap anywhere</div>
     </div>
 
     <!-- SCREEN 1 -->
     <div class="screen">
-        <h1>The journey started from 16th January 2003</h1>
+        <h1>The journey started on 16th January 2003</h1>
         <div class="photos">
             <img src="images/start1.jpg">
             <img src="images/start2.jpg">
         </div>
-        <div class="hint">Click to continue</div>
+        <div class="hint">Tap to continue</div>
     </div>
 
     <!-- SCREEN 2 -->
     <div class="screen">
-        <h1>23 years of togetherness</h1>
+        <h1>26 Years of Togetherness</h1>
         <div class="photos">
             <img src="images/now1.jpg">
             <img src="images/now2.jpg">
         </div>
-        <div class="hint">Click to continue</div>
+        <div class="hint">Tap to continue</div>
     </div>
 
     <!-- SCREEN 3 -->
@@ -220,23 +136,24 @@
         <h1>Our Beautiful Family</h1>
         <img src="images/family.jpg" class="single-img">
         <p>
-            Acha & Amma, your journey together is our greatest blessing—happy anniversary and always.
+            Acha & Amma, your journey together is our greatest blessing.  
+            Happy Wedding Anniversary ❤️
         </p>
     </div>
 
 </div>
+</div>
 
 <script>
-    let current = 0;
-    const screens = document.querySelectorAll(".screen");
-
-    document.body.addEventListener("click", () => {
-        if (current < screens.length - 1) {
-            screens[current].classList.remove("active");
-            current++;
-            screens[current].classList.add("active");
-        }
-    });
+let current=0;
+const screens=document.querySelectorAll(".screen");
+document.getElementById("overlay").addEventListener("click",()=>{
+    if(current < screens.length-1){
+        screens[current].classList.remove("active");
+        current++;
+        screens[current].classList.add("active");
+    }
+});
 </script>
 
 </body>
